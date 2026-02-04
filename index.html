@@ -1,0 +1,3537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete n8n Webhook Guide for 2026 - Mobile App">
+    <title>n8n Webhook Guide 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1a1a2e;
+            line-height: 1.6;
+            margin: 1%;
+            padding-bottom: 2rem;
+        }
+
+        .container {
+            max-width: 100%;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: #ffffff;
+            padding: 1.5rem 1%;
+            text-align: center;
+            border-bottom: 4px solid #ff6b9d;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0.3rem;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 1% 1%;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            color: #667eea;
+            margin: 1.2rem 0 0.6rem 0;
+            padding-bottom: 0.3rem;
+            border-bottom: 2px solid #f093fb;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 0.95rem;
+            color: #764ba2;
+            margin: 1rem 0 0.5rem 0;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 0.8rem;
+            color: #2d2d44;
+            font-size: 0.9rem;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-left: 4px solid #667eea;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            border-radius: 6px;
+            color: #1a1a2e;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-left: 4px solid #f5576c;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            border-radius: 6px;
+            color: #1a1a2e;
+        }
+
+        .code-block {
+            background: #2d2d44;
+            color: #f8f8f2;
+            padding: 0.8rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 0.8rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            border: 2px solid #667eea;
+        }
+
+        .step {
+            background: #f8f9fa;
+            padding: 0.8rem;
+            margin: 0.6rem 0;
+            border-radius: 6px;
+            border-left: 4px solid #f093fb;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 1.8rem;
+            height: 1.8rem;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+        }
+
+        ul, ol {
+            margin-left: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+            color: #2d2d44;
+            font-size: 0.9rem;
+        }
+
+        .method-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.75rem;
+            margin-right: 0.3rem;
+        }
+
+        .get { background: #10b981; color: white; }
+        .post { background: #3b82f6; color: white; }
+        .put { background: #f59e0b; color: white; }
+        .delete { background: #ef4444; color: white; }
+
+        .footer {
+            text-align: center;
+            padding: 1rem 1%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.8rem 0;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            display: block;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th, td {
+            padding: 0.6rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 1.2rem; }
+            h2 { font-size: 1rem; }
+            h3 { font-size: 0.9rem; }
+            p, li { font-size: 0.85rem; }
+            .code-block { font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔗 n8n Webhook Guide 2026</h1>
+            <div class="subtitle">Complete Mobile Reference for Webhook Automation</div>
+        </header>
+
+        <div class="content">
+            <div class="info-box">
+                <strong>📱 What is n8n?</strong><br>
+                n8n is a powerful, open-source workflow automation tool that connects apps and services through webhooks, APIs, and triggers. Webhooks are the core of n8n's real-time automation capabilities.
+            </div>
+
+            <h2>📋 What are Webhooks?</h2>
+            <p>Webhooks are automated messages sent from apps when something happens. In n8n, webhooks allow external services to trigger workflows automatically, enabling real-time automation without polling.</p>
+
+            <div class="info-box">
+                <strong>Key Concept:</strong> Instead of n8n constantly checking for updates (polling), webhooks push data to n8n the moment an event occurs, making workflows faster and more efficient.
+            </div>
+
+            <h2>🚀 Getting Started with n8n Webhooks</h2>
+
+            <h3>Setting Up Your First Webhook</h3>
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Create a New Workflow</strong><br>
+                Open n8n and click "New Workflow" in the dashboard.
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Add Webhook Node</strong><br>
+                Search for "Webhook" in the node panel and drag it to your canvas.
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Configure the Webhook</strong><br>
+                Set the HTTP method (GET, POST, PUT, DELETE) and path.
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Copy Webhook URL</strong><br>
+                n8n generates a unique URL - copy this to use in external services.
+            </div>
+
+            <div class="step">
+                <span class="step-number">5</span>
+                <strong>Activate Workflow</strong><br>
+                Toggle the workflow to "Active" to start receiving webhook calls.
+            </div>
+
+            <h2>🔧 Webhook Configuration Options</h2>
+
+            <h3>HTTP Methods</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Purpose</th>
+                        <th>Common Use</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="method-badge get">GET</span></td>
+                        <td>Retrieve data</td>
+                        <td>Status checks, read operations</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method-badge post">POST</span></td>
+                        <td>Send data</td>
+                        <td>Form submissions, creating records</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method-badge put">PUT</span></td>
+                        <td>Update data</td>
+                        <td>Updating existing records</td>
+                    </tr>
+                    <tr>
+                        <td><span class="method-badge delete">DELETE</span></td>
+                        <td>Remove data</td>
+                        <td>Deleting records</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Authentication Options</h3>
+            <ul>
+                <li><strong>None:</strong> Public webhook, no authentication required</li>
+                <li><strong>Basic Auth:</strong> Username and password protection</li>
+                <li><strong>Header Auth:</strong> Custom header-based authentication</li>
+                <li><strong>Query Auth:</strong> Authentication via URL parameters</li>
+            </ul>
+
+            <h2>📊 Webhook URL Structure</h2>
+            <div class="code-block">
+https://your-n8n-instance.com/webhook/your-path
+
+# Production webhook (requires active workflow)
+https://your-n8n-instance.com/webhook/form-submission
+
+# Test webhook (for development)
+https://your-n8n-instance.com/webhook-test/form-submission
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Important:</strong> Test webhooks only work when the workflow editor is open. For production, use production webhooks with an activated workflow.
+            </div>
+
+            <h2>💡 Common Webhook Use Cases</h2>
+
+            <h3>1. Form Submissions</h3>
+            <p>Capture form data from websites and trigger automated workflows:</p>
+            <div class="code-block">
+// Example POST request to webhook
+fetch('https://your-n8n.com/webhook/contact-form', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    name: 'John Doe',
+    email: '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2d8dddadcf2d7cad3dfc2ded79cd1dddf">[email&#160;protected]</a>',
+    message: 'Hello from 2026!'
+  })
+});
+            </div>
+
+            <h3>2. E-commerce Order Processing</h3>
+            <ul>
+                <li>Receive order notifications from Shopify, WooCommerce</li>
+                <li>Process payments and update inventory</li>
+                <li>Send confirmation emails automatically</li>
+                <li>Update CRM with customer data</li>
+            </ul>
+
+            <h3>3. GitHub Integration</h3>
+            <ul>
+                <li>Trigger workflows on push, pull request, or issues</li>
+                <li>Automate CI/CD pipelines</li>
+                <li>Send notifications to team channels</li>
+            </ul>
+
+            <h3>4. Stripe Payment Events</h3>
+            <ul>
+                <li>Process successful payments</li>
+                <li>Handle failed transactions</li>
+                <li>Manage subscription updates</li>
+            </ul>
+
+            <h2>🔐 Securing Your Webhooks</h2>
+
+            <h3>Best Practices for 2026</h3>
+            <ol>
+                <li><strong>Use HTTPS:</strong> Always use SSL/TLS encryption</li>
+                <li><strong>Implement Authentication:</strong> Add header or basic auth</li>
+                <li><strong>Validate Payloads:</strong> Check incoming data structure</li>
+                <li><strong>IP Whitelisting:</strong> Restrict to known IP addresses</li>
+                <li><strong>Rate Limiting:</strong> Prevent abuse with request limits</li>
+                <li><strong>Signature Verification:</strong> Verify webhook signatures from services</li>
+            </ol>
+
+            <div class="info-box">
+                <strong>Example: Header Authentication</strong><br>
+                Set a custom header like <span class="highlight">X-API-Key: your-secret-key-2026</span> in webhook settings, and verify it matches in your workflow.
+            </div>
+
+            <h2>📝 Working with Webhook Data</h2>
+
+            <h3>Accessing Webhook Data in n8n</h3>
+            <p>Data from webhooks is available in the <span class="highlight">$json</span> object:</p>
+
+            <div class="code-block">
+// Access body data
+{{ $json.body.name }}
+{{ $json.body.email }}
+
+// Access headers
+{{ $json.headers['content-type'] }}
+{{ $json.headers['user-agent'] }}
+
+// Access query parameters
+{{ $json.query.id }}
+{{ $json.query.source }}
+            </div>
+
+            <h3>Common Data Transformations</h3>
+            <ul>
+                <li>Use <strong>Set</strong> node to restructure data</li>
+                <li>Use <strong>Function</strong> node for complex JavaScript logic</li>
+                <li>Use <strong>If</strong> node for conditional routing</li>
+                <li>Use <strong>Code</strong> node for Python/JavaScript processing</li>
+            </ul>
+
+            <h2>🎯 Advanced Webhook Features (2026)</h2>
+
+            <h3>1. Response Customization</h3>
+            <p>Return custom responses from your webhooks:</p>
+            <div class="step">
+                Enable "Respond to Webhook" in webhook settings to send custom JSON, HTML, or text responses back to the caller.
+            </div>
+
+            <h3>2. Binary Data Handling</h3>
+            <p>Process file uploads through webhooks:</p>
+            <ul>
+                <li>Enable "Binary Data" in webhook options</li>
+                <li>Handle image uploads, PDFs, CSV files</li>
+                <li>Process with n8n's binary data nodes</li>
+            </ul>
+
+            <h3>3. Webhook Chaining</h3>
+            <p>Create complex workflows by chaining multiple webhooks together, allowing output from one to trigger another.</p>
+
+            <h2>🐛 Troubleshooting Common Issues</h2>
+
+            <div class="warning-box">
+                <strong>Issue:</strong> Webhook not receiving data<br>
+                <strong>Solutions:</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li>Verify workflow is activated</li>
+                    <li>Check webhook URL is correct</li>
+                    <li>Ensure HTTP method matches</li>
+                    <li>Review authentication settings</li>
+                    <li>Check n8n logs for errors</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <strong>Issue:</strong> Webhook timing out<br>
+                <strong>Solutions:</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li>Optimize workflow execution time</li>
+                    <li>Use "Respond to Webhook" early in workflow</li>
+                    <li>Consider async processing for long tasks</li>
+                    <li>Increase timeout settings if self-hosted</li>
+                </ul>
+            </div>
+
+            <h2>📈 Performance Optimization</h2>
+
+            <h3>Tips for High-Volume Webhooks</h3>
+            <ol>
+                <li><strong>Queue Processing:</strong> Use Redis or message queues for high traffic</li>
+                <li><strong>Batch Operations:</strong> Group multiple webhook calls when possible</li>
+                <li><strong>Error Handling:</strong> Implement retry logic and error notifications</li>
+                <li><strong>Monitoring:</strong> Set up alerts for failed webhook executions</li>
+                <li><strong>Caching:</strong> Cache frequently accessed data to reduce processing time</li>
+            </ol>
+
+            <h2>🔄 Webhook vs Polling</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Webhook</th>
+                        <th>Polling</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Speed</strong></td>
+                        <td>⚡ Instant</td>
+                        <td>⏱️ Delayed</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Efficiency</strong></td>
+                        <td>✅ High (event-driven)</td>
+                        <td>❌ Low (constant checking)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Resources</strong></td>
+                        <td>💚 Minimal</td>
+                        <td>💛 Higher usage</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Setup</strong></td>
+                        <td>🔧 More complex</td>
+                        <td>🟢 Simpler</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Best For</strong></td>
+                        <td>Real-time events</td>
+                        <td>Services without webhooks</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>🌐 Popular Services with Webhook Support</h2>
+
+            <h3>2026 Integration Highlights</h3>
+            <ul>
+                <li><strong>Stripe:</strong> Payment events, subscriptions, invoices</li>
+                <li><strong>GitHub:</strong> Repository events, pull requests, issues</li>
+                <li><strong>Slack:</strong> Messages, reactions, slash commands</li>
+                <li><strong>Shopify:</strong> Orders, products, customers</li>
+                <li><strong>Twilio:</strong> SMS received, call events</li>
+                <li><strong>Discord:</strong> Messages, server events</li>
+                <li><strong>Mailchimp:</strong> Subscriber updates, campaign events</li>
+                <li><strong>TypeForm:</strong> Form submissions</li>
+                <li><strong>Calendly:</strong> Booking events</li>
+                <li><strong>Airtable:</strong> Record changes</li>
+            </ul>
+
+            <h2>📚 Quick Reference Commands</h2>
+
+            <h3>Test Webhook with cURL</h3>
+            <div class="code-block">
+# POST request with JSON data
+curl -X POST https://your-n8n.com/webhook/test \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Test","value":"2026"}'
+
+# GET request with query parameters
+curl "https://your-n8n.com/webhook/test?id=123&type=demo"
+
+# POST with authentication header
+curl -X POST https://your-n8n.com/webhook/secure \
+  -H "X-API-Key: your-secret-key" \
+  -H "Content-Type: application/json" \
+  -d '{"data":"sensitive"}'
+            </div>
+
+            <h3>JavaScript Fetch Example</h3>
+            <div class="code-block">
+async function triggerWebhook() {
+  try {
+    const response = await fetch(
+      'https://your-n8n.com/webhook/api-call',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-Key': 'your-2026-key'
+        },
+        body: JSON.stringify({
+          timestamp: new Date().toISOString(),
+          event: 'user_signup',
+          data: { userId: 12345 }
+        })
+      }
+    );
+    const result = await response.json();
+    console.log('Success:', result);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+            </div>
+
+            <h2>✅ Webhook Checklist</h2>
+
+            <div class="info-box">
+                <strong>Before Going Live:</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li>☑️ Test webhook with sample data</li>
+                    <li>☑️ Verify authentication is working</li>
+                    <li>☑️ Check error handling logic</li>
+                    <li>☑️ Enable workflow activation</li>
+                    <li>☑️ Set up monitoring and alerts</li>
+                    <li>☑️ Document webhook URL and requirements</li>
+                    <li>☑️ Test production environment</li>
+                    <li>☑️ Implement rate limiting if needed</li>
+                </ul>
+            </div>
+
+            <h2>🆕 What's New in n8n 2026</h2>
+
+            <ul>
+                <li><strong>Enhanced Security:</strong> Built-in signature verification for major services</li>
+                <li><strong>Auto-scaling:</strong> Intelligent webhook queue management</li>
+                <li><strong>AI Integration:</strong> Natural language webhook configuration</li>
+                <li><strong>Real-time Debugging:</strong> Live webhook inspector and logger</li>
+                <li><strong>Multi-region Support:</strong> Deploy webhooks closer to your users</li>
+                <li><strong>Advanced Analytics:</strong> Webhook performance metrics and insights</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>💡 Pro Tip:</strong> In 2026, leverage n8n's AI-powered workflow suggestions to optimize your webhook processing and discover automation opportunities you might have missed!
+            </div>
+
+            <h2>📞 Resources & Support</h2>
+
+            <ul>
+                <li><strong>Official Documentation:</strong> docs.n8n.io</li>
+                <li><strong>Community Forum:</strong> community.n8n.io</li>
+                <li><strong>GitHub Repository:</strong> github.com/n8n-io/n8n</li>
+                <li><strong>YouTube Channel:</strong> Tutorial videos and use cases</li>
+                <li><strong>Discord Community:</strong> Real-time help and discussions</li>
+            </ul>
+
+            <h2>🎓 SECTION 1: Webhook Fundamentals & Concepts</h2>
+
+            <h3>Webhook Lifecycle</h3>
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Creation:</strong> Developer configures webhook endpoint in n8n workflow
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Registration:</strong> Webhook URL is registered with external service
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Event Trigger:</strong> External service detects an event (order placed, form submitted)
+            </div>
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Delivery:</strong> Service sends HTTP request with event data to webhook URL
+            </div>
+            <div class="step">
+                <span class="step-number">5</span>
+                <strong>Processing:</strong> n8n receives data and executes workflow logic
+            </div>
+            <div class="step">
+                <span class="step-number">6</span>
+                <strong>Response:</strong> n8n sends HTTP response (200 OK, 400 Error, etc.)
+            </div>
+            <div class="step">
+                <span class="step-number">7</span>
+                <strong>Retry (if needed):</strong> Service retries if response indicates failure
+            </div>
+
+            <h3>Synchronous vs Asynchronous Webhooks</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Behavior</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Synchronous</strong></td>
+                        <td>Sender waits for response</td>
+                        <td>Real-time validation, immediate feedback</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Asynchronous</strong></td>
+                        <td>Fire and forget</td>
+                        <td>Long processing, background jobs</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Webhook Payload Structure Anatomy</h3>
+            <div class="code-block">
+{
+  "headers": {
+    "content-type": "application/json",
+    "user-agent": "External-Service/1.0",
+    "x-webhook-signature": "sha256=abc123...",
+    "x-request-id": "req_2026_xyz"
+  },
+  "body": {
+    "event": "order.created",
+    "timestamp": "2026-02-04T10:30:00Z",
+    "data": {
+      "id": "ord_12345",
+      "amount": 99.99,
+      "currency": "USD",
+      "customer": {
+        "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c5a6b0b6b1aaa8a0b785a0bda4a8b5a9a0eba6aaa8">[email&#160;protected]</a>"
+      }
+    }
+  },
+  "query": {
+    "source": "mobile_app",
+    "version": "2.0"
+  }
+}
+            </div>
+
+            <h3>Content-Type Variations</h3>
+            <ul>
+                <li><strong>application/json:</strong> Most common, structured data</li>
+                <li><strong>application/x-www-form-urlencoded:</strong> HTML form submissions</li>
+                <li><strong>multipart/form-data:</strong> File uploads with metadata</li>
+                <li><strong>application/xml:</strong> Legacy systems, SOAP services</li>
+                <li><strong>text/plain:</strong> Simple text notifications</li>
+            </ul>
+
+            <h3>Idempotency - Preventing Duplicate Processing</h3>
+            <div class="info-box">
+                <strong>What is Idempotency?</strong> Ensuring the same webhook can be processed multiple times without causing duplicate actions.<br><br>
+                <strong>Implementation:</strong> Use unique IDs to track processed webhooks
+            </div>
+
+            <div class="code-block">
+// Example: Check if webhook already processed
+const webhookId = $json.body.id;
+const processed = await checkDatabase(webhookId);
+
+if (processed) {
+  return { status: 'already_processed' };
+}
+
+// Process webhook
+await processOrder($json.body);
+
+// Mark as processed
+await markAsProcessed(webhookId);
+            </div>
+
+            <h3>Webhook Delivery Guarantees</h3>
+            <ul>
+                <li><strong>At-most-once:</strong> Webhook sent once, no retries (may be lost)</li>
+                <li><strong>At-least-once:</strong> Webhook retried until success (may duplicate)</li>
+                <li><strong>Exactly-once:</strong> Complex system ensures single processing (rare)</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>Best Practice:</strong> Always design for at-least-once delivery and implement idempotency to handle duplicates gracefully.
+            </div>
+
+            <h2>⚡ SECTION 2: Advanced n8n Webhook Features</h2>
+
+            <h3>Webhook Response Modes</h3>
+
+            <h4>Immediate Response (Default)</h4>
+            <div class="code-block">
+// Workflow responds as soon as webhook node executes
+Webhook → Response (200 OK immediately)
+      ↓
+  Continue processing (async)
+            </div>
+
+            <h4>Delayed Response</h4>
+            <div class="code-block">
+// Wait for entire workflow before responding
+Webhook → Process Data → Validate → Query DB → Custom Response
+                                                      ↓
+                                              Return 200/400/500
+            </div>
+
+            <div class="info-box">
+                <strong>Enable Delayed Response:</strong> In webhook node settings, enable "Respond to Webhook" and place "Respond to Webhook" node at the desired point in your workflow.
+            </div>
+
+            <h3>Wait for Webhook Node</h3>
+            <p>Create multi-step processes where workflow waits for external confirmation:</p>
+
+            <div class="code-block">
+// Example: Approval workflow
+1. Receive initial webhook (order request)
+2. Send approval email with unique link
+3. Wait for Webhook (approval response)
+4. Process based on approval status
+            </div>
+
+            <div class="step">
+                <strong>Setup:</strong> Use "Wait for Webhook" node to pause workflow execution until another webhook is received, perfect for human approvals or multi-step integrations.
+            </div>
+
+            <h3>Dynamic Webhook Paths</h3>
+            <p>Create webhooks with variable paths using expressions:</p>
+
+            <div class="code-block">
+// Static path
+/webhook/orders
+
+// Dynamic path with customer ID
+/webhook/orders/{{ $json.customerId }}
+
+// Dynamic path with multiple variables
+/webhook/{{ $json.tenant }}/{{ $json.eventType }}
+            </div>
+
+            <h3>Webhook Versioning Strategies</h3>
+            <ul>
+                <li><strong>URL Versioning:</strong> /webhook/v1/orders vs /webhook/v2/orders</li>
+                <li><strong>Header Versioning:</strong> X-API-Version: 2.0</li>
+                <li><strong>Query Parameter:</strong> /webhook/orders?version=2</li>
+                <li><strong>Content Negotiation:</strong> Accept: application/vnd.api.v2+json</li>
+            </ul>
+
+            <h3>Multi-Webhook Workflows</h3>
+            <div class="code-block">
+// Multiple webhooks in one workflow
+Webhook 1 (GitHub Push) ──┐
+                           ├──→ Merge Data → Process → Notify
+Webhook 2 (Jira Update) ──┘
+            </div>
+
+            <h2>💼 SECTION 3: Real-World Workflow Examples</h2>
+
+            <h3>Example 1: E-Commerce Order Processing</h3>
+            <div class="info-box">
+                <strong>Scenario:</strong> Automatically process Shopify orders, update inventory, notify team, and send customer confirmation.
+            </div>
+
+            <div class="code-block">
+// Workflow Structure:
+1. Webhook (Shopify Order Created)
+   ↓
+2. Set Node (Extract order details)
+   ↓
+3. IF Node (Check inventory availability)
+   ├─ TRUE → Update Inventory (Airtable)
+   │         ↓
+   │         Send Confirmation Email (SendGrid)
+   │         ↓
+   │         Notify Team (Slack)
+   │
+   └─ FALSE → Send Out of Stock Email
+              ↓
+              Create Backorder Task (Asana)
+            </div>
+
+            <h3>Example 2: Form Submission to CRM</h3>
+            <div class="code-block">
+// Complete workflow for lead capture
+1. Webhook (Web Form POST)
+   ↓
+2. Function Node (Validate & Clean Data)
+   {
+     // Remove HTML, validate email
+     const email = $json.body.email.trim().toLowerCase();
+     const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+     return { email, isValid, ...otherFields };
+   }
+   ↓
+3. IF Node (Email Valid?)
+   ├─ TRUE → Check Duplicate (HubSpot API)
+   │         ↓
+   │         Create/Update Contact
+   │         ↓
+   │         Add to Email Sequence
+   │         ↓
+   │         Send Slack Notification
+   │
+   └─ FALSE → Log Error
+              ↓
+              Send Admin Alert
+            </div>
+
+            <h3>Example 3: GitHub to Deployment Pipeline</h3>
+            <div class="code-block">
+// CI/CD automation with webhooks
+1. Webhook (GitHub Push to main branch)
+   ↓
+2. Set Node (Extract commit info)
+   ↓
+3. HTTP Request (Trigger Build - Jenkins/CircleCI)
+   ↓
+4. Wait 5 minutes
+   ↓
+5. HTTP Request (Check Build Status)
+   ↓
+6. IF Node (Build Success?)
+   ├─ TRUE → Deploy to Staging
+   │         ↓
+   │         Run Tests
+   │         ↓
+   │         Slack: "✅ Deployed to Staging"
+   │
+   └─ FALSE → Slack: "❌ Build Failed"
+              ↓
+              Create GitHub Issue
+            </div>
+
+            <h3>Example 4: Payment Processing with Error Handling</h3>
+            <div class="code-block">
+// Stripe webhook with comprehensive error handling
+1. Webhook (Stripe Event)
+   ↓
+2. Verify Signature (Function Node)
+   ↓
+3. Switch Node (Event Type)
+   ├─ payment_intent.succeeded
+   │  → Update Order Status
+   │  → Send Receipt
+   │  → Update Analytics
+   │
+   ├─ payment_intent.failed
+   │  → Send Failure Email
+   │  → Create Support Ticket
+   │  → Log to Error Tracking
+   │
+   ├─ subscription.created
+   │  → Add to CRM
+   │  → Send Welcome Email
+   │  → Provision Access
+   │
+   └─ default
+      → Log Unknown Event
+      → Alert Admin
+            </div>
+
+            <h3>Example 5: Multi-Step Approval Workflow</h3>
+            <div class="code-block">
+// Expense approval system
+1. Webhook (Expense Submitted)
+   ↓
+2. IF Node (Amount > $500?)
+   ├─ TRUE → Send Manager Approval Email
+   │         ↓
+   │         Wait for Webhook (Approval Link Clicked)
+   │         ↓
+   │         IF Approved?
+   │         ├─ YES → Process Payment
+   │         └─ NO → Notify Submitter
+   │
+   └─ FALSE → Auto-approve
+              ↓
+              Process Payment
+            </div>
+
+            <h2>🐞 SECTION 4: Error Handling & Debugging</h2>
+
+            <h3>Common HTTP Status Codes</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Meaning</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>200</strong></td>
+                        <td>Success</td>
+                        <td>Webhook processed successfully</td>
+                    </tr>
+                    <tr>
+                        <td><strong>400</strong></td>
+                        <td>Bad Request</td>
+                        <td>Invalid data format, fix payload</td>
+                    </tr>
+                    <tr>
+                        <td><strong>401</strong></td>
+                        <td>Unauthorized</td>
+                        <td>Check authentication credentials</td>
+                    </tr>
+                    <tr>
+                        <td><strong>403</strong></td>
+                        <td>Forbidden</td>
+                        <td>Valid auth but no permission</td>
+                    </tr>
+                    <tr>
+                        <td><strong>404</strong></td>
+                        <td>Not Found</td>
+                        <td>Verify webhook URL is correct</td>
+                    </tr>
+                    <tr>
+                        <td><strong>429</strong></td>
+                        <td>Too Many Requests</td>
+                        <td>Rate limited, implement backoff</td>
+                    </tr>
+                    <tr>
+                        <td><strong>500</strong></td>
+                        <td>Internal Server Error</td>
+                        <td>n8n error, check logs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>502</strong></td>
+                        <td>Bad Gateway</td>
+                        <td>n8n unavailable, retry later</td>
+                    </tr>
+                    <tr>
+                        <td><strong>503</strong></td>
+                        <td>Service Unavailable</td>
+                        <td>Temporary issue, retry</td>
+                    </tr>
+                    <tr>
+                        <td><strong>504</strong></td>
+                        <td>Gateway Timeout</td>
+                        <td>Processing too slow, optimize</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Retry Logic with Exponential Backoff</h3>
+            <div class="code-block">
+// Implementing retry logic in workflow
+const maxRetries = 3;
+const baseDelay = 1000; // 1 second
+
+for (let attempt = 0; attempt < maxRetries; attempt++) {
+  try {
+    await processWebhook($json);
+    return { success: true };
+  } catch (error) {
+    if (attempt === maxRetries - 1) {
+      // Final attempt failed
+      await sendErrorNotification(error);
+      throw error;
+    }
+    // Exponential backoff: 1s, 2s, 4s
+    const delay = baseDelay * Math.pow(2, attempt);
+    await sleep(delay);
+  }
+}
+            </div>
+
+            <h3>Dead Letter Queue Pattern</h3>
+            <div class="info-box">
+                <strong>Concept:</strong> When webhooks fail after all retries, send them to a "dead letter queue" for manual review.
+            </div>
+
+            <div class="code-block">
+// Dead letter queue implementation
+1. Webhook Receives Data
+   ↓
+2. Try Processing (with error handling)
+   ↓
+3. IF Error after retries?
+   ├─ TRUE → Send to Dead Letter Queue (Airtable/Google Sheets)
+   │         ↓
+   │         Log Error Details
+   │         ↓
+   │         Alert Admin via Email/Slack
+   │
+   └─ FALSE → Success, continue
+            </div>
+
+            <h3>Webhook Execution History Analysis</h3>
+            <p>In n8n, access execution history to debug issues:</p>
+            <ul>
+                <li>Navigate to "Executions" tab in n8n</li>
+                <li>Filter by workflow, date range, or status</li>
+                <li>Click on failed executions to see error details</li>
+                <li>View input/output data at each node</li>
+                <li>Use "Retry" button to reprocess failed webhooks</li>
+            </ul>
+
+            <h3>Comprehensive Logging Best Practices</h3>
+            <div class="code-block">
+// Structured logging in Function node
+const logEntry = {
+  timestamp: new Date().toISOString(),
+  webhookId: $json.body.id,
+  eventType: $json.body.event,
+  source: $json.headers['user-agent'],
+  ipAddress: $json.headers['x-forwarded-for'],
+  processingTime: Date.now() - startTime,
+  status: 'success',
+  metadata: {
+    customerId: $json.body.customer?.id,
+    amount: $json.body.amount
+  }
+};
+
+// Send to logging service
+await sendToDatadog(logEntry);
+// Or save to database
+await saveToMongoDB('webhook_logs', logEntry);
+
+return logEntry;
+            </div>
+
+            <h3>Testing Strategies</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Environment</th>
+                        <th>Method</th>
+                        <th>Tools</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Local</strong></td>
+                        <td>Use test webhook + ngrok</td>
+                        <td>ngrok, localhost.run</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Staging</strong></td>
+                        <td>Separate n8n instance</td>
+                        <td>staging.n8n.example.com</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Production</strong></td>
+                        <td>Gradual rollout, monitoring</td>
+                        <td>Feature flags, canary deployment</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Mock Webhook Services for Testing</h3>
+            <ul>
+                <li><strong>Webhook.site:</strong> Instant webhook URL with request inspector</li>
+                <li><strong>RequestBin:</strong> Collect and inspect HTTP requests</li>
+                <li><strong>Beeceptor:</strong> Mock API endpoints with custom responses</li>
+                <li><strong>Mocky.io:</strong> Generate mock API responses</li>
+                <li><strong>Postman Mock Server:</strong> Create mock servers from collections</li>
+            </ul>
+
+            <h2>🔐 SECTION 5: Security Deep Dive</h2>
+
+            <h3>HMAC Signature Verification (Step-by-Step)</h3>
+            <div class="info-box">
+                <strong>Purpose:</strong> Verify that webhooks are genuinely from the claimed sender and haven't been tampered with.
+            </div>
+
+            <div class="code-block">
+// Example: Verifying Shopify webhook signature
+const crypto = require('crypto');
+
+// 1. Get the signature from headers
+const receivedSignature = $json.headers['x-shopify-hmac-sha256'];
+
+// 2. Get your secret from environment variable
+const webhookSecret = 'your_shopify_webhook_secret';
+
+// 3. Calculate HMAC of the raw body
+const body = JSON.stringify($json.body);
+const calculatedSignature = crypto
+  .createHmac('sha256', webhookSecret)
+  .update(body, 'utf8')
+  .digest('base64');
+
+// 4. Compare signatures (timing-safe comparison)
+const isValid = crypto.timingSafeEqual(
+  Buffer.from(receivedSignature),
+  Buffer.from(calculatedSignature)
+);
+
+if (!isValid) {
+  throw new Error('Invalid webhook signature - potential security threat');
+}
+
+// 5. Continue processing if valid
+return { verified: true, data: $json.body };
+            </div>
+
+            <h3>Stripe Signature Verification</h3>
+            <div class="code-block">
+// Stripe uses a different signature method
+const stripe = require('stripe');
+
+const signature = $json.headers['stripe-signature'];
+const webhookSecret = 'whsec_your_secret';
+const rawBody = $json.body; // Get raw body, not parsed JSON
+
+try {
+  const event = stripe.webhooks.constructEvent(
+    rawBody,
+    signature,
+    webhookSecret
+  );
+  
+  // Webhook is verified, process the event
+  return { verified: true, event };
+} catch (err) {
+  throw new Error('Stripe signature verification failed: ' + err.message);
+}
+            </div>
+
+            <h3>OAuth 2.0 Integration with Webhooks</h3>
+            <div class="code-block">
+// Using OAuth tokens in webhook requests
+1. Webhook receives event notification
+   ↓
+2. Extract OAuth token from headers
+   const token = $json.headers['authorization'].replace('Bearer ', '');
+   ↓
+3. Validate token with OAuth provider
+   const isValid = await validateOAuthToken(token);
+   ↓
+4. If valid, proceed with workflow
+   if (!isValid) {
+     return { statusCode: 401, body: 'Invalid token' };
+   }
+            </div>
+
+            <h3>JWT Tokens in Webhooks</h3>
+            <div class="code-block">
+// Validating JWT in webhook
+const jwt = require('jsonwebtoken');
+
+const token = $json.headers['authorization']?.split(' ')[1];
+const secret = 'your_jwt_secret';
+
+try {
+  const decoded = jwt.verify(token, secret);
+  
+  // Check expiration
+  if (decoded.exp < Date.now() / 1000) {
+    throw new Error('Token expired');
+  }
+  
+  // Check custom claims
+  if (decoded.role !== 'admin') {
+    throw new Error('Insufficient permissions');
+  }
+  
+  return { verified: true, user: decoded };
+} catch (error) {
+  return { statusCode: 401, error: error.message };
+}
+            </div>
+
+            <h3>Webhook Secret Rotation</h3>
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Generate new secret</strong> but keep old one active
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Accept both secrets</strong> during transition period (7-30 days)
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Update all webhook registrations</strong> with new secret
+            </div>
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Monitor usage</strong> of old secret (should drop to zero)
+            </div>
+            <div class="step">
+                <span class="step-number">5</span>
+                <strong>Deactivate old secret</strong> after confirmation
+            </div>
+
+            <h3>CORS Configuration for Webhooks</h3>
+            <div class="code-block">
+// Setting CORS headers in Respond to Webhook node
+{
+  "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Max-Age": "86400"
+  },
+  "statusCode": 200,
+  "body": { "status": "success" }
+}
+            </div>
+
+            <h3>Preventing Replay Attacks</h3>
+            <div class="code-block">
+// Using timestamp + nonce to prevent replay attacks
+const timestamp = $json.headers['x-timestamp'];
+const nonce = $json.headers['x-nonce'];
+
+// 1. Check timestamp is recent (within 5 minutes)
+const now = Date.now();
+const requestTime = parseInt(timestamp);
+const maxAge = 5 * 60 * 1000; // 5 minutes
+
+if (now - requestTime > maxAge) {
+  throw new Error('Request timestamp too old - possible replay attack');
+}
+
+// 2. Check nonce hasn't been used before
+const nonceExists = await checkNonceInCache(nonce);
+if (nonceExists) {
+  throw new Error('Nonce already used - replay attack detected');
+}
+
+// 3. Store nonce with TTL
+await storeNonceInCache(nonce, maxAge);
+
+// 4. Continue processing
+return { verified: true };
+            </div>
+
+            <h3>Sanitizing Incoming Data</h3>
+            <div class="code-block">
+// Sanitize user input to prevent injection attacks
+const sanitize = (input) => {
+  if (typeof input !== 'string') return input;
+  
+  return input
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+    .replace(/\//g, '&#x2F;');
+};
+
+// Clean all incoming data
+const cleanData = {
+  name: sanitize($json.body.name),
+  email: sanitize($json.body.email),
+  message: sanitize($json.body.message)
+};
+
+// Validate email format
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailRegex.test(cleanData.email)) {
+  throw new Error('Invalid email format');
+}
+
+return cleanData;
+            </div>
+
+            <h2>⚡ SECTION 6: Performance & Scalability</h2>
+
+            <h3>Handling High-Volume Webhooks (1000+ per minute)</h3>
+
+            <div class="info-box">
+                <strong>Strategy:</strong> Use queue systems to buffer incoming webhooks and process them asynchronously.
+            </div>
+
+            <h4>Architecture for High Volume</h4>
+            <div class="code-block">
+// Three-tier architecture
+┌─────────────┐
+│   Webhook   │ ← Receives requests (respond 200 immediately)
+│   Receiver  │
+└──────┬──────┘
+       │
+       ↓ Push to Queue
+┌─────────────┐
+│    Redis    │ ← Buffer (handles 10k+ req/sec)
+│    Queue    │
+└──────┬──────┘
+       │
+       ↓ Workers pull from queue
+┌─────────────┐
+│  Processing │ ← n8n workflows process batches
+│   Workers   │
+└─────────────┘
+            </div>
+
+            <h3>Redis Queue Implementation</h3>
+            <div class="code-block">
+// Step 1: Webhook receives data, adds to Redis queue
+const Redis = require('ioredis');
+const redis = new Redis();
+
+// Add to queue
+await redis.lpush(
+  'webhook_queue',
+  JSON.stringify({
+    id: generateUniqueId(),
+    timestamp: Date.now(),
+    data: $json.body,
+    headers: $json.headers
+  })
+);
+
+// Respond immediately (don't wait for processing)
+return {
+  statusCode: 202, // Accepted
+  body: { status: 'queued', message: 'Webhook received and queued for processing' }
+};
+
+// Step 2: Separate workflow polls queue and processes
+const items = await redis.rpop('webhook_queue', 10); // Process 10 at a time
+items.forEach(item => processWebhook(JSON.parse(item)));
+            </div>
+
+            <h3>Load Balancing Strategies</h3>
+            <ul>
+                <li><strong>Round Robin:</strong> Distribute webhooks evenly across n8n instances</li>
+                <li><strong>Least Connections:</strong> Send to instance with fewest active connections</li>
+                <li><strong>IP Hash:</strong> Same sender always goes to same instance (session affinity)</li>
+                <li><strong>Weighted Distribution:</strong> More powerful instances handle more load</li>
+            </ul>
+
+            <h3>Database Optimization for Webhook Data</h3>
+            <div class="code-block">
+// Best practices for storing webhook data
+1. Use indexes on frequently queried fields
+   - webhook_id (unique)
+   - timestamp (for time-range queries)
+   - status (for filtering failed webhooks)
+   - event_type (for grouping)
+
+2. Partition large tables by date
+   CREATE TABLE webhooks_2026_02 PARTITION OF webhooks
+   FOR VALUES FROM ('2026-02-01') TO ('2026-03-01');
+
+3. Archive old webhook data
+   - Move data older than 90 days to cold storage
+   - Keep metadata for auditing
+
+4. Use appropriate data types
+   - JSONB for flexible payload storage (PostgreSQL)
+   - Timestamp with timezone for accurate time tracking
+   - UUID for webhook IDs
+            </div>
+
+            <h3>Caching Strategies</h3>
+            <div class="code-block">
+// Cache frequently accessed data
+const cache = new Map();
+
+// Check cache before expensive operation
+const cacheKey = `customer_${customerId}`;
+let customerData = cache.get(cacheKey);
+
+if (!customerData) {
+  // Cache miss - fetch from database
+  customerData = await fetchCustomerFromDB(customerId);
+  
+  // Store in cache with TTL
+  cache.set(cacheKey, customerData);
+  setTimeout(() => cache.delete(cacheKey), 300000); // 5 min TTL
+}
+
+return customerData;
+            </div>
+
+            <h3>Async Processing Patterns</h3>
+            <div class="code-block">
+// Pattern 1: Fire and Forget
+Webhook → Queue → Respond 202
+              ↓
+         Process Later (separate workflow)
+
+// Pattern 2: Callback Pattern
+Webhook → Start Processing → Respond 202 with callback URL
+              ↓
+         Complete Processing → Send result to callback URL
+
+// Pattern 3: Polling Pattern
+Webhook → Create Job → Respond with job_id
+              ↓
+         Client polls /status/{job_id}
+              ↓
+         Return status/result when ready
+            </div>
+
+            <h3>Webhook Batching Techniques</h3>
+            <div class="code-block">
+// Batch multiple webhooks for efficient processing
+const batch = [];
+const BATCH_SIZE = 100;
+const BATCH_TIMEOUT = 5000; // 5 seconds
+
+// Collect webhooks
+batch.push($json.body);
+
+if (batch.length >= BATCH_SIZE || timeSinceLastBatch > BATCH_TIMEOUT) {
+  // Process entire batch at once
+  await processBatch(batch);
+  
+  // Bulk insert to database (much faster than individual inserts)
+  await database.insertMany('webhooks', batch);
+  
+  // Clear batch
+  batch.length = 0;
+}
+            </div>
+
+            <h2>🔌 SECTION 7: Integration-Specific Guides</h2>
+
+            <h3>Stripe Webhook Complete Setup</h3>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Create Webhook in Stripe Dashboard</strong><br>
+                Go to Developers → Webhooks → Add endpoint
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Configure n8n Webhook</strong><br>
+                Method: POST, Path: /stripe-webhook
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Get Signing Secret</strong><br>
+                Copy webhook signing secret from Stripe (whsec_...)
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Verify Signature in n8n</strong>
+            </div>
+
+            <div class="code-block">
+// Complete Stripe webhook handler
+const stripe = require('stripe')('sk_test_...');
+const endpointSecret = 'whsec_...';
+
+const sig = $json.headers['stripe-signature'];
+const payload = $json.rawBody; // Important: use raw body
+
+let event;
+try {
+  event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+} catch (err) {
+  return { statusCode: 400, body: `Webhook Error: ${err.message}` };
+}
+
+// Handle different event types
+switch (event.type) {
+  case 'payment_intent.succeeded':
+    const paymentIntent = event.data.object;
+    await handleSuccessfulPayment(paymentIntent);
+    break;
+    
+  case 'payment_intent.payment_failed':
+    const failedPayment = event.data.object;
+    await handleFailedPayment(failedPayment);
+    break;
+    
+  case 'customer.subscription.created':
+    const subscription = event.data.object;
+    await handleNewSubscription(subscription);
+    break;
+    
+  default:
+    console.log(`Unhandled event type ${event.type}`);
+}
+
+return { statusCode: 200, body: { received: true } };
+            </div>
+
+            <h3>Shopify Webhook Configuration</h3>
+
+            <div class="code-block">
+// Shopify webhook verification
+const crypto = require('crypto');
+
+const hmac = $json.headers['x-shopify-hmac-sha256'];
+const secret = 'your_shopify_secret';
+const body = JSON.stringify($json.body);
+
+const hash = crypto
+  .createHmac('sha256', secret)
+  .update(body, 'utf8')
+  .digest('base64');
+
+if (hash !== hmac) {
+  throw new Error('Invalid Shopify signature');
+}
+
+// Handle Shopify events
+const topic = $json.headers['x-shopify-topic'];
+
+switch (topic) {
+  case 'orders/create':
+    await handleNewOrder($json.body);
+    break;
+  case 'orders/updated':
+    await handleOrderUpdate($json.body);
+    break;
+  case 'products/create':
+    await handleNewProduct($json.body);
+    break;
+}
+            </div>
+
+            <h3>GitHub Webhook Events Catalog</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Trigger</th>
+                        <th>Common Use</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>push</strong></td>
+                        <td>Code pushed to repository</td>
+                        <td>CI/CD, deployments</td>
+                    </tr>
+                    <tr>
+                        <td><strong>pull_request</strong></td>
+                        <td>PR opened/closed/merged</td>
+                        <td>Code review notifications</td>
+                    </tr>
+                    <tr>
+                        <td><strong>issues</strong></td>
+                        <td>Issue created/updated</td>
+                        <td>Project management sync</td>
+                    </tr>
+                    <tr>
+                        <td><strong>release</strong></td>
+                        <td>Release published</td>
+                        <td>Changelog generation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>star</strong></td>
+                        <td>Repository starred</td>
+                        <td>Analytics tracking</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block">
+// GitHub webhook handler
+const event = $json.headers['x-github-event'];
+const signature = $json.headers['x-hub-signature-256'];
+
+// Verify signature
+const secret = 'your_github_secret';
+const payload = JSON.stringify($json.body);
+const expectedSignature = 'sha256=' + 
+  crypto.createHmac('sha256', secret)
+    .update(payload)
+    .digest('hex');
+
+if (signature !== expectedSignature) {
+  throw new Error('Invalid GitHub signature');
+}
+
+// Handle events
+switch (event) {
+  case 'push':
+    const branch = $json.body.ref.replace('refs/heads/', '');
+    if (branch === 'main') {
+      await triggerDeployment($json.body);
+    }
+    break;
+    
+  case 'pull_request':
+    if ($json.body.action === 'opened') {
+      await notifyReviewers($json.body.pull_request);
+    }
+    break;
+}
+            </div>
+
+            <h3>Slack Slash Commands & Interactivity</h3>
+
+            <div class="code-block">
+// Slack slash command webhook
+// Example: /deploy staging
+
+const command = $json.body.command; // '/deploy'
+const text = $json.body.text; // 'staging'
+const userId = $json.body.user_id;
+const channelId = $json.body.channel_id;
+
+// Respond within 3 seconds (Slack requirement)
+const immediateResponse = {
+  response_type: 'in_channel',
+  text: `🚀 Deployment to ${text} initiated by <@${userId}>...`
+};
+
+// Start async deployment
+triggerDeployment(text, userId, channelId);
+
+return immediateResponse;
+            </div>
+
+            <h3>Twilio SMS/Voice Webhooks</h3>
+
+            <div class="code-block">
+// Twilio SMS webhook
+const from = $json.body.From;
+const body = $json.body.Body;
+const messageSid = $json.body.MessageSid;
+
+// Validate Twilio signature
+const twilioSignature = $json.headers['x-twilio-signature'];
+const url = 'https://your-n8n.com/webhook/twilio-sms';
+const params = $json.body;
+
+const isValid = twilio.validateRequest(
+  'your_auth_token',
+  twilioSignature,
+  url,
+  params
+);
+
+if (!isValid) {
+  throw new Error('Invalid Twilio signature');
+}
+
+// Process SMS
+await processSMS({ from, body, messageSid });
+
+// Respond with TwiML
+return {
+  statusCode: 200,
+  headers: { 'Content-Type': 'text/xml' },
+  body: `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Message>Thanks for your message! We'll get back to you soon.</Message>
+</Response>`
+};
+            </div>
+
+            <h3>TypeForm Detailed Integration</h3>
+
+            <div class="code-block">
+// TypeForm webhook payload structure
+{
+  "event_id": "LtWXD3crgy",
+  "event_type": "form_response",
+  "form_response": {
+    "form_id": "lT4Z3j",
+    "token": "a3a12ec67a1365927098a606107fac15",
+    "submitted_at": "2026-02-04T15:20:00Z",
+    "definition": {
+      "fields": [
+        { "id": "DlXFaesGBNal", "title": "What is your name?" },
+        { "id": "SMEUb7VJz92Q", "title": "What is your email?" }
+      ]
+    },
+    "answers": [
+      { "field": { "id": "DlXFaesGBNal" }, "text": "John Doe" },
+      { "field": { "id": "SMEUb7VJz92Q" }, "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aac0c5c2c4eacfd2cbc7dac6cf84c9c5c7">[email&#160;protected]</a>" }
+    ]
+  }
+}
+
+// Extract answers easily
+const answers = $json.body.form_response.answers;
+const nameAnswer = answers.find(a => a.field.id === 'DlXFaesGBNal');
+const emailAnswer = answers.find(a => a.field.id === 'SMEUb7VJz92Q');
+
+const data = {
+  name: nameAnswer.text,
+  email: emailAnswer.email,
+  submittedAt: $json.body.form_response.submitted_at
+};
+            </div>
+
+            <h2>🧪 SECTION 8: Development & Testing</h2>
+
+            <h3>Local Webhook Testing with ngrok</h3>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Install ngrok</strong><br>
+                Download from ngrok.com or: npm install -g ngrok
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Start n8n locally</strong><br>
+                n8n starts on http://localhost:5678
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Create ngrok tunnel</strong>
+            </div>
+
+            <div class="code-block">
+# Expose local n8n to internet
+ngrok http 5678
+
+# Output:
+# Forwarding: https://abc123.ngrok.io → http://localhost:5678
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Use ngrok URL in webhooks</strong><br>
+                https://abc123.ngrok.io/webhook/test
+            </div>
+
+            <div class="warning-box">
+                <strong>Note:</strong> Free ngrok URLs change on restart. For persistent URLs, use ngrok paid plan or alternatives like localhost.run, serveo.net
+            </div>
+
+            <h3>Alternative: localhost.run</h3>
+            <div class="code-block">
+# No installation required
+ssh -R 80:localhost:5678 localhost.run
+
+# Get a public URL instantly
+# https://random-name.localhost.run → http://localhost:5678
+            </div>
+
+            <h3>Webhook Testing Tools</h3>
+
+            <h4>1. Webhook.site</h4>
+            <ul>
+                <li>Instant unique URL with request inspector</li>
+                <li>View headers, body, query parameters</li>
+                <li>Custom response configuration</li>
+                <li>Request history retention</li>
+            </ul>
+
+            <h4>2. RequestBin</h4>
+            <div class="code-block">
+# Create a RequestBin
+1. Go to requestbin.com
+2. Click "Create a RequestBin"
+3. Get URL: https://requestbin.com/abc123
+4. Send test webhooks to this URL
+5. Inspect all requests in real-time
+            </div>
+
+            <h4>3. Beeceptor</h4>
+            <ul>
+                <li>Mock REST API endpoints</li>
+                <li>Define custom response rules</li>
+                <li>Simulate delays and errors</li>
+                <li>Perfect for testing error handling</li>
+            </ul>
+
+            <h3>Postman Collections for Webhook Testing</h3>
+
+            <div class="code-block">
+// Create a Postman collection for your webhooks
+{
+  "info": {
+    "name": "n8n Webhook Tests",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/"
+  },
+  "item": [
+    {
+      "name": "Test Order Webhook",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"orderId\": \"12345\",\n  \"amount\": 99.99,\n  \"customer\": \"<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="701a1f181e301508111d001c155e131f1d">[email&#160;protected]</a>\"\n}"
+        },
+        "url": {
+          "raw": "https://your-n8n.com/webhook/orders",
+          "protocol": "https",
+          "host": ["your-n8n", "com"],
+          "path": ["webhook", "orders"]
+        }
+      }
+    }
+  ]
+}
+            </div>
+
+            <h3>Unit Testing Webhook Workflows</h3>
+
+            <div class="code-block">
+// Using n8n API to test workflows
+const axios = require('axios');
+
+describe('Order Webhook Tests', () => {
+  test('should process valid order', async () => {
+    const response = await axios.post(
+      'https://your-n8n.com/webhook/orders',
+      {
+        orderId: 'TEST123',
+        amount: 50.00,
+        customer: '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5f2b3a2c2b1f3a273e322f333a713c3032">[email&#160;protected]</a>'
+      },
+      {
+        headers: { 'Content-Type': 'application/json' }
+      }
+    );
+    
+    expect(response.status).toBe(200);
+    expect(response.data.status).toBe('success');
+  });
+  
+  test('should reject invalid data', async () => {
+    const response = await axios.post(
+      'https://your-n8n.com/webhook/orders',
+      { invalid: 'data' }
+    );
+    
+    expect(response.status).toBe(400);
+  });
+});
+            </div>
+
+            <h3>CI/CD for n8n Workflows</h3>
+
+            <div class="code-block">
+// GitHub Actions workflow for n8n
+name: Test n8n Workflows
+
+on: [push, pull_request]
+
+jobs:
+  test-webhooks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+      
+      - name: Install n8n
+        run: npm install -g n8n
+      
+      - name: Start n8n
+        run: n8n start &
+        
+      - name: Wait for n8n
+        run: sleep 10
+        
+      - name: Test webhooks
+        run: npm test
+            </div>
+
+            <h3>Version Control for Workflows (Git Integration)</h3>
+
+            <div class="code-block">
+// Export n8n workflow as JSON
+1. Open workflow in n8n
+2. Click "..." menu → Download
+3. Save as workflow.json
+4. Commit to Git repository
+
+// Import workflow
+1. Go to n8n
+2. Click "Import from File"
+3. Select workflow.json
+4. Activate workflow
+
+// Automation: Use n8n API
+curl -X POST https://your-n8n.com/api/v1/workflows \
+  -H "X-N8N-API-KEY: your-api-key" \
+  -H "Content-Type: application/json" \
+  -d @workflow.json
+            </div>
+
+            <h2>📊 SECTION 9: Monitoring & Analytics</h2>
+
+            <h3>Webhook Monitoring Dashboard Setup</h3>
+
+            <div class="info-box">
+                <strong>Key Metrics to Track:</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li>Total webhooks received (per hour/day)</li>
+                    <li>Success rate (%)</li>
+                    <li>Average response time (ms)</li>
+                    <li>Error rate by type</li>
+                    <li>Peak load times</li>
+                    <li>Queue depth (if using queues)</li>
+                </ul>
+            </div>
+
+            <h3>Datadog Integration Example</h3>
+
+            <div class="code-block">
+// Send webhook metrics to Datadog
+const { StatsD } = require('hot-shots');
+const dogstatsd = new StatsD();
+
+// Increment webhook counter
+dogstatsd.increment('webhook.received', 1, [`event:${eventType}`]);
+
+// Track processing time
+const startTime = Date.now();
+await processWebhook($json);
+const duration = Date.now() - startTime;
+dogstatsd.histogram('webhook.processing_time', duration);
+
+// Track errors
+if (error) {
+  dogstatsd.increment('webhook.error', 1, [`error:${error.type}`]);
+}
+            </div>
+
+            <h3>Alerting on Webhook Failures</h3>
+
+            <div class="code-block">
+// Monitor error rate and alert
+const errorRate = failedWebhooks / totalWebhooks;
+const threshold = 0.05; // 5%
+
+if (errorRate > threshold) {
+  // Send alert to Slack
+  await sendSlackAlert({
+    channel: '#alerts',
+    text: `🚨 Webhook error rate: ${(errorRate * 100).toFixed(2)}%`,
+    blocks: [
+      {
+        type: 'section',
+        text: {
+          type: 'mrkdwn',
+          text: `*High webhook error rate detected*\n` +
+                `Failed: ${failedWebhooks}\n` +
+                `Total: ${totalWebhooks}\n` +
+                `Rate: ${(errorRate * 100).toFixed(2)}%`
+        }
+      }
+    ]
+  });
+  
+  // Send email to ops team
+  await sendEmail({
+    to: '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="553a252615302d34382539307b363a38">[email&#160;protected]</a>',
+    subject: 'Webhook Alert: High Error Rate',
+    body: `Error rate exceeded threshold...`
+  });
+}
+            </div>
+
+            <h3>Success/Failure Rate Tracking</h3>
+
+            <div class="code-block">
+// Track webhook execution stats
+const stats = {
+  timestamp: new Date(),
+  total: 0,
+  success: 0,
+  failed: 0,
+  byEventType: {}
+};
+
+// After each webhook
+stats.total++;
+if (success) {
+  stats.success++;
+} else {
+  stats.failed++;
+}
+
+// Group by event type
+const eventType = $json.body.event;
+if (!stats.byEventType[eventType]) {
+  stats.byEventType[eventType] = { total: 0, success: 0, failed: 0 };
+}
+stats.byEventType[eventType].total++;
+stats.byEventType[eventType][success ? 'success' : 'failed']++;
+
+// Save to database hourly
+await saveStats(stats);
+            </div>
+
+            <h3>Response Time Monitoring</h3>
+
+            <div class="code-block">
+// Track webhook response times
+const performanceLog = {
+  webhookId: generateId(),
+  startTime: Date.now(),
+  steps: []
+};
+
+// Log each step
+performanceLog.steps.push({
+  name: 'signature_verification',
+  duration: 15 // ms
+});
+
+performanceLog.steps.push({
+  name: 'database_query',
+  duration: 45 // ms
+});
+
+performanceLog.steps.push({
+  name: 'api_call',
+  duration: 230 // ms
+});
+
+performanceLog.totalDuration = Date.now() - performanceLog.startTime;
+
+// Identify bottlenecks
+const slowest = performanceLog.steps.sort((a, b) => b.duration - a.duration)[0];
+if (slowest.duration > 200) {
+  console.warn(`Slow step detected: ${slowest.name} (${slowest.duration}ms)`);
+}
+            </div>
+
+            <h3>Cost Tracking for Webhook Operations</h3>
+
+            <div class="code-block">
+// Calculate webhook processing costs
+const costs = {
+  computation: 0,  // CPU/memory
+  database: 0,     // DB operations
+  apiCalls: 0,     // External API costs
+  storage: 0       // Data storage
+};
+
+// Track computation cost
+const executionTimeMs = 250;
+const costPerMsCompute = 0.00001; // $0.01 per 1000ms
+costs.computation = executionTimeMs * costPerMsCompute;
+
+// Track database operations
+const dbQueries = 3;
+const costPerQuery = 0.0001;
+costs.database = dbQueries * costPerQuery;
+
+// Track API calls
+const apiCalls = 2;
+const costPerApiCall = 0.001;
+costs.apiCalls = apiCalls * costPerApiCall;
+
+// Total cost
+const totalCost = Object.values(costs).reduce((a, b) => a + b, 0);
+
+console.log(`Webhook cost: $${totalCost.toFixed(6)}`);
+            </div>
+
+            <h2>✨ SECTION 10: Best Practices & Patterns</h2>
+
+            <h3>RESTful Webhook Design Principles</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Principle</th>
+                        <th>Good</th>
+                        <th>Bad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Resource-based URLs</strong></td>
+                        <td>/webhook/orders</td>
+                        <td>/webhook/createOrder</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Plural nouns</strong></td>
+                        <td>/webhook/customers</td>
+                        <td>/webhook/customer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Consistent naming</strong></td>
+                        <td>snake_case or camelCase</td>
+                        <td>Mixed styles</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Versioning</strong></td>
+                        <td>/webhook/v2/orders</td>
+                        <td>/webhook/orders_new</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Event Naming Conventions</h3>
+
+            <div class="code-block">
+// Good event naming pattern: resource.action
+{
+  "event": "order.created",
+  "event": "customer.updated",
+  "event": "payment.failed",
+  "event": "subscription.cancelled"
+}
+
+// Include past tense for completed actions
+{
+  "event": "order.created",      // Not "order.create"
+  "event": "invoice.sent",       // Not "invoice.send"
+  "event": "user.deleted"        // Not "user.delete"
+}
+
+// Organize with namespaces for complex systems
+{
+  "event": "billing.invoice.paid",
+  "event": "billing.subscription.renewed",
+  "event": "shipping.package.delivered"
+}
+            </div>
+
+            <h3>Payload Design Patterns</h3>
+
+            <div class="code-block">
+// Standard webhook payload structure
+{
+  "id": "evt_2026_abc123",           // Unique event ID
+  "type": "order.created",            // Event type
+  "created": "2026-02-04T10:30:00Z", // ISO 8601 timestamp
+  "version": "2.0",                   // API version
+  "data": {
+    "object": "order",                // Resource type
+    "id": "ord_12345",                // Resource ID
+    "attributes": {
+      "amount": 99.99,
+      "currency": "USD",
+      "status": "pending",
+      "customer": {
+        "id": "cus_67890",
+        "email": "<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="197a6c6a6d76747c6b597c61787469757c377a7674">[email&#160;protected]</a>"
+      }
+    }
+  },
+  "metadata": {                       // Optional context
+    "source": "mobile_app",
+    "user_agent": "MyApp/2.0",
+    "ip_address": "192.168.1.1"
+  }
+}
+            </div>
+
+            <h3>Versioning Webhooks Strategy</h3>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>URL Versioning (Recommended)</strong><br>
+                /webhook/v1/orders → /webhook/v2/orders
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Support Multiple Versions</strong><br>
+                Maintain v1 and v2 simultaneously during transition (6-12 months)
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Deprecation Notice</strong><br>
+                Add deprecation header: X-API-Deprecation: v1 deprecated, migrate to v2
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Sunset Date</strong><br>
+                Communicate sunset date well in advance (90+ days)
+            </div>
+
+            <h3>Documentation Templates</h3>
+
+            <div class="code-block">
+# Webhook Documentation Template
+
+## Endpoint
+POST /webhook/orders
+
+## Description
+Receive notifications when new orders are created
+
+## Authentication
+Header: X-API-Key: your_api_key
+
+## Payload Example
+```json
+{
+  "event": "order.created",
+  "data": {
+    "id": "ord_12345",
+    "amount": 99.99,
+    "currency": "USD"
+  }
+}
+```
+
+## Response
+```json
+{
+  "status": "received",
+  "id": "evt_abc123"
+}
+```
+
+## Error Codes
+- 400: Invalid payload
+- 401: Invalid API key
+- 500: Internal server error
+
+## Retry Policy
+Failed webhooks retry 3 times with exponential backoff:
+- 1st retry: after 5 seconds
+- 2nd retry: after 25 seconds
+- 3rd retry: after 125 seconds
+
+## Rate Limits
+100 requests per minute per API key
+            </div>
+
+            <h3>SLA Considerations</h3>
+
+            <ul>
+                <li><strong>Availability:</strong> 99.9% uptime (8.76 hours downtime/year)</li>
+                <li><strong>Response Time:</strong> 95% of webhooks processed within 200ms</li>
+                <li><strong>Delivery Guarantee:</strong> At-least-once delivery with retries</li>
+                <li><strong>Data Retention:</strong> Webhook logs retained for 30 days</li>
+                <li><strong>Support Response:</strong> Critical issues resolved within 4 hours</li>
+            </ul>
+
+            <h3>Rate Limiting Implementation</h3>
+
+            <div class="code-block">
+// Token bucket algorithm for rate limiting
+class RateLimiter {
+  constructor(maxRequests, windowMs) {
+    this.maxRequests = maxRequests;
+    this.windowMs = windowMs;
+    this.buckets = new Map();
+  }
+  
+  isAllowed(key) {
+    const now = Date.now();
+    const bucket = this.buckets.get(key) || { tokens: this.maxRequests, lastRefill: now };
+    
+    // Refill tokens
+    const timePassed = now - bucket.lastRefill;
+    const tokensToAdd = Math.floor(timePassed / this.windowMs) * this.maxRequests;
+    bucket.tokens = Math.min(this.maxRequests, bucket.tokens + tokensToAdd);
+    bucket.lastRefill = now;
+    
+    // Check if request allowed
+    if (bucket.tokens > 0) {
+      bucket.tokens--;
+      this.buckets.set(key, bucket);
+      return true;
+    }
+    
+    return false;
+  }
+}
+
+// Usage
+const limiter = new RateLimiter(100, 60000); // 100 req/min
+const apiKey = $json.headers['x-api-key'];
+
+if (!limiter.isAllowed(apiKey)) {
+  return {
+    statusCode: 429,
+    body: { error: 'Rate limit exceeded' }
+  };
+}
+            </div>
+
+            <h3>Graceful Degradation Strategies</h3>
+
+            <div class="code-block">
+// Handle failures gracefully
+try {
+  // Primary action: Update CRM
+  await updateCRM($json.body);
+} catch (error) {
+  // Fallback 1: Queue for retry
+  await addToRetryQueue($json.body);
+  
+  // Fallback 2: Save locally
+  await saveToLocalDatabase($json.body);
+  
+  // Continue workflow (don't fail completely)
+  console.warn('CRM update failed, queued for retry');
+}
+
+// Always respond success to prevent retries
+return { statusCode: 200, body: { received: true } };
+            </div>
+
+            <h2>🔧 SECTION 11: Troubleshooting Scenarios</h2>
+
+            <h3>Scenario 1: Webhook Not Triggering</h3>
+
+            <div class="warning-box">
+                <strong>Symptom:</strong> Webhook URL configured but workflow not executing
+            </div>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Check workflow is activated</strong><br>
+                Toggle must be ON (blue) for production webhooks
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Verify webhook URL</strong><br>
+                Check for typos, ensure using production URL not test URL
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Confirm HTTP method matches</strong><br>
+                If webhook expects POST but receiving GET, it won't trigger
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Check authentication settings</strong><br>
+                Verify headers/credentials if authentication is enabled
+            </div>
+
+            <div class="step">
+                <span class="step-number">5</span>
+                <strong>Review n8n logs</strong><br>
+                Check for errors in n8n console or log files
+            </div>
+
+            <div class="step">
+                <span class="step-number">6</span>
+                <strong>Test with curl</strong>
+            </div>
+
+            <div class="code-block">
+curl -X POST https://your-n8n.com/webhook/test \
+  -H "Content-Type: application/json" \
+  -d '{"test": "data"}'
+            </div>
+
+            <h3>Scenario 2: Timeout Issues</h3>
+
+            <div class="warning-box">
+                <strong>Symptom:</strong> Webhook receives 504 Gateway Timeout
+            </div>
+
+            <div class="code-block">
+// Solution 1: Respond immediately, process async
+Webhook → Respond 202 Accepted
+       ↓
+  Queue for processing (don't wait)
+
+// Solution 2: Optimize slow operations
+- Add database indexes
+- Cache frequently accessed data
+- Use bulk operations instead of loops
+- Parallelize independent tasks
+
+// Solution 3: Increase timeout (self-hosted)
+// In n8n settings/environment variables
+N8N_WEBHOOK_TIMEOUT=30000 // 30 seconds
+            </div>
+
+            <h3>Scenario 3: Authentication Failures</h3>
+
+            <div class="warning-box">
+                <strong>Symptom:</strong> Receiving 401 Unauthorized errors
+            </div>
+
+            <div class="code-block">
+// Debug authentication
+console.log('Headers received:', $json.headers);
+
+// Check for auth header
+const authHeader = $json.headers['authorization'];
+if (!authHeader) {
+  console.error('Missing authorization header');
+}
+
+// Verify format
+if (!authHeader.startsWith('Bearer ')) {
+  console.error('Invalid auth format, expected: Bearer <token>');
+}
+
+// Extract and validate token
+const token = authHeader.replace('Bearer ', '');
+const isValid = await validateToken(token);
+console.log('Token valid:', isValid);
+            </div>
+
+            <h3>Scenario 4: Data Not Parsing Correctly</h3>
+
+            <div class="code-block">
+// Problem: Can't access webhook data
+console.log('Full webhook data:', JSON.stringify($json, null, 2));
+
+// Check Content-Type
+const contentType = $json.headers['content-type'];
+console.log('Content-Type:', contentType);
+
+// Handle different content types
+if (contentType.includes('application/json')) {
+  // JSON data in $json.body
+  const data = $json.body;
+} else if (contentType.includes('application/x-www-form-urlencoded')) {
+  // Form data, might need parsing
+  const data = $json.body; // n8n parses automatically
+} else if (contentType.includes('multipart/form-data')) {
+  // File upload, check binary data
+  const files = $json.binary;
+}
+
+// Common issue: Nested data
+// Instead of: $json.customer.email
+// Try: $json.body.customer.email
+// Or: $json.body.data.customer.email
+            </div>
+
+            <h3>Scenario 5: Duplicate Webhook Calls</h3>
+
+            <div class="warning-box">
+                <strong>Symptom:</strong> Same webhook processed multiple times
+            </div>
+
+            <div class="code-block">
+// Solution: Implement idempotency
+const webhookId = $json.body.id || $json.headers['x-request-id'];
+
+// Check if already processed
+const processed = await redis.get(`webhook:${webhookId}`);
+if (processed) {
+  console.log('Webhook already processed, skipping');
+  return { statusCode: 200, body: { status: 'duplicate' } };
+}
+
+// Process webhook
+await processWebhook($json.body);
+
+// Mark as processed (with TTL)
+await redis.setex(`webhook:${webhookId}`, 86400, 'true'); // 24 hours
+
+return { statusCode: 200, body: { status: 'processed' } };
+            </div>
+
+            <h3>Scenario 6: Missing Data in Payload</h3>
+
+            <div class="code-block">
+// Validate required fields
+const requiredFields = ['orderId', 'amount', 'customer'];
+const missingFields = [];
+
+requiredFields.forEach(field => {
+  if (!$json.body[field]) {
+    missingFields.push(field);
+  }
+});
+
+if (missingFields.length > 0) {
+  return {
+    statusCode: 400,
+    body: {
+      error: 'Missing required fields',
+      missing: missingFields
+    }
+  };
+}
+
+// Provide defaults for optional fields
+const data = {
+  orderId: $json.body.orderId,
+  amount: $json.body.amount,
+  customer: $json.body.customer,
+  currency: $json.body.currency || 'USD',  // Default
+  notes: $json.body.notes || '',           // Default
+};
+            </div>
+
+            <h3>Scenario 7: Cross-Origin Issues (CORS)</h3>
+
+            <div class="code-block">
+// Enable CORS in webhook response
+return {
+  statusCode: 200,
+  headers: {
+    'Access-Control-Allow-Origin': '*', // Or specific domain
+    'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+  },
+  body: { status: 'success' }
+};
+
+// Handle preflight requests
+if ($json.method === 'OPTIONS') {
+  return {
+    statusCode: 204,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      'Access-Control-Max-Age': '86400',
+    }
+  };
+}
+            </div>
+
+            <h2>🎯 SECTION 12: n8n-Specific Tips</h2>
+
+            <h3>Environment Variables for Webhook URLs</h3>
+
+            <div class="code-block">
+// Use environment variables for flexibility
+// In n8n settings or .env file
+WEBHOOK_BASE_URL=https://your-n8n.com
+API_KEY=your_secret_key_2026
+
+// In workflow expressions
+{{ $env.WEBHOOK_BASE_URL }}/webhook/orders
+{{ $env.API_KEY }}
+
+// Benefits:
+// - Easy to change between environments (dev/staging/prod)
+// - Keep secrets out of workflows
+// - Share workflows without exposing credentials
+            </div>
+
+            <h3>Self-Hosted vs Cloud Webhook Differences</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Cloud (n8n.cloud)</th>
+                        <th>Self-Hosted</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>URL</strong></td>
+                        <td>Provided by n8n</td>
+                        <td>Your domain</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SSL/HTTPS</strong></td>
+                        <td>Automatic</td>
+                        <td>Must configure</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Timeout</strong></td>
+                        <td>Fixed (30s typical)</td>
+                        <td>Configurable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Rate Limits</strong></td>
+                        <td>Per plan</td>
+                        <td>You control</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scaling</strong></td>
+                        <td>Automatic</td>
+                        <td>Manual setup</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Webhook Execution Limits and Quotas</h3>
+
+            <div class="info-box">
+                <strong>Cloud Plans (Example):</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li>Starter: 2,500 webhook executions/month</li>
+                    <li>Pro: 10,000 webhook executions/month</li>
+                    <li>Enterprise: Unlimited</li>
+                </ul>
+                Check current limits at n8n.io/pricing
+            </div>
+
+            <h3>Workflow Templates for Common Scenarios</h3>
+
+            <div class="code-block">
+// n8n Template: Form to Email
+1. Webhook (form submission)
+2. Set (clean data)
+3. Send Email
+4. Save to Google Sheets
+5. Respond to Webhook (success message)
+
+// n8n Template: Slack Command Handler
+1. Webhook (Slack slash command)
+2. Switch (route by command)
+3. HTTP Request (fetch data)
+4. Respond to Webhook (Slack message)
+
+// n8n Template: GitHub to Slack
+1. Webhook (GitHub push)
+2. IF (check branch = main)
+3. Function (format message)
+4. Slack (send notification)
+            </div>
+
+            <h3>Sub-Workflows with Webhooks</h3>
+
+            <div class="code-block">
+// Main workflow
+Webhook → Execute Workflow (call sub-workflow)
+       ↓
+   Continue main workflow
+
+// Sub-workflow (reusable)
+1. Process Data
+2. Validate
+3. Transform
+4. Return Result
+
+// Benefits:
+// - Reuse logic across multiple webhooks
+// - Keep workflows organized and maintainable
+// - Easier to test individual components
+            </div>
+
+            <h3>Splitting and Merging Webhook Data</h3>
+
+            <div class="code-block">
+// Split: Process array items separately
+Webhook (receives order with multiple items)
+   ↓
+Split In Batches (process 10 items at a time)
+   ↓
+Function (process each item)
+   ↓
+Merge (combine results)
+   ↓
+Respond
+
+// Example: Order with 100 items
+// Instead of processing all at once (timeout risk)
+// Process in batches of 10
+            </div>
+
+            <h3>Using Sticky Nodes for Webhook Debugging</h3>
+
+            <div class="info-box">
+                <strong>Sticky Notes:</strong> Add notes in n8n canvas to document webhook behavior
+                <ul style="margin-top: 0.5rem;">
+                    <li>Right-click canvas → Add Sticky Note</li>
+                    <li>Document expected payload structure</li>
+                    <li>Note common error scenarios</li>
+                    <li>Track webhook version changes</li>
+                    <li>Add debugging tips for team members</li>
+                </ul>
+            </div>
+
+            <h2>⚖️ SECTION 13: Compliance & Legal</h2>
+
+            <h3>GDPR Considerations for Webhook Data</h3>
+
+            <div class="warning-box">
+                <strong>Personal Data in Webhooks:</strong> If webhooks contain EU citizen data, GDPR applies
+            </div>
+
+            <ul>
+                <li><strong>Data Minimization:</strong> Only collect necessary data in webhooks</li>
+                <li><strong>Encryption:</strong> Always use HTTPS/TLS for webhook transmission</li>
+                <li><strong>Right to Erasure:</strong> Implement ability to delete webhook data on request</li>
+                <li><strong>Data Processing Agreements:</strong> Ensure third-party services are GDPR compliant</li>
+                <li><strong>Breach Notification:</strong> Alert users within 72 hours of data breaches</li>
+            </ul>
+
+            <h3>Data Retention Policies</h3>
+
+            <div class="code-block">
+// Automated data retention workflow
+1. Scheduled Trigger (runs daily)
+   ↓
+2. Query webhook logs older than 90 days
+   ↓
+3. Archive to cold storage (S3 Glacier)
+   ↓
+4. Delete from primary database
+   ↓
+5. Log retention action
+   ↓
+6. Send summary email to compliance team
+
+// Example retention periods
+- Webhook execution logs: 30 days (hot storage)
+- Webhook data: 90 days (warm storage)
+- Archived data: 7 years (cold storage, compliance)
+- PII data: Delete on request or after 1 year inactive
+            </div>
+
+            <h3>PII Handling in Webhooks</h3>
+
+            <div class="code-block">
+// Anonymize PII in logs
+const logData = {
+  webhookId: $json.id,
+  eventType: $json.body.event,
+  timestamp: Date.now(),
+  // Hash email instead of storing plaintext
+  customerHash: crypto.createHash('sha256')
+    .update($json.body.email)
+    .digest('hex'),
+  // Mask sensitive data
+  cardLast4: $json.body.cardNumber.slice(-4),
+  amount: $json.body.amount
+};
+
+// Never log full credit cards, SSN, passwords
+// Remove PII before external logging services
+            </div>
+
+            <h3>Audit Logging Requirements</h3>
+
+            <div class="code-block">
+// Comprehensive audit trail
+const auditLog = {
+  timestamp: new Date().toISOString(),
+  action: 'webhook.received',
+  webhookId: $json.body.id,
+  userId: $json.body.userId,
+  ipAddress: $json.headers['x-forwarded-for'],
+  userAgent: $json.headers['user-agent'],
+  dataAccessed: ['customer.email', 'order.amount'],
+  dataModified: ['order.status'],
+  result: 'success',
+  
+  // Compliance fields
+  legalBasis: 'contract',  // GDPR legal basis
+  dataRetention: '90_days',
+  consentId: 'consent_123'
+};
+
+await saveToAuditLog(auditLog);
+            </div>
+
+            <h2>🔄 SECTION 14: Migration & Integration</h2>
+
+            <h3>Moving from Zapier to n8n</h3>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Document Zapier Webhooks</strong><br>
+                List all webhook URLs, triggers, and actions
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Recreate in n8n</strong><br>
+                Build equivalent workflows in n8n
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Test in Parallel</strong><br>
+                Run both Zapier and n8n webhooks simultaneously
+            </div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Update Webhook Registrations</strong><br>
+                Point external services to n8n URLs
+            </div>
+
+            <div class="step">
+                <span class="step-number">5</span>
+                <strong>Monitor for 2 Weeks</strong><br>
+                Verify all webhooks working correctly
+            </div>
+
+            <div class="step">
+                <span class="step-number">6</span>
+                <strong>Deactivate Zapier</strong><br>
+                Turn off old Zapier webhooks
+            </div>
+
+            <h3>Integrating with Existing APIs</h3>
+
+            <div class="code-block">
+// Bridge webhook to existing REST API
+Webhook (external service)
+   ↓
+Function (transform data to API format)
+   ↓
+HTTP Request (call your existing API)
+   ↓
+IF (check API response)
+   ├─ Success → Respond 200
+   └─ Error → Retry logic
+   
+// Example transformation
+const apiPayload = {
+  customer_id: $json.body.customerId,
+  order_total: $json.body.amount / 100, // Convert cents to dollars
+  items: $json.body.lineItems.map(item => ({
+    sku: item.productId,
+    quantity: item.qty,
+    price: item.price
+  }))
+};
+
+return { body: apiPayload };
+            </div>
+
+            <h3>Webhook Backwards Compatibility</h3>
+
+            <div class="code-block">
+// Support both old and new payload formats
+const webhookVersion = $json.headers['x-api-version'] || '1.0';
+
+let normalizedData;
+
+if (webhookVersion === '1.0') {
+  // Old format
+  normalizedData = {
+    orderId: $json.body.order_id,  // snake_case
+    customerId: $json.body.customer_id,
+    amount: $json.body.total
+  };
+} else if (webhookVersion === '2.0') {
+  // New format
+  normalizedData = {
+    orderId: $json.body.orderId,   // camelCase
+    customerId: $json.body.customerId,
+    amount: $json.body.amount
+  };
+}
+
+// Process normalized data
+await processOrder(normalizedData);
+            </div>
+
+            <h3>Deprecation Strategies</h3>
+
+            <div class="code-block">
+// Sunset old webhook version
+const version = $json.headers['x-api-version'];
+const SUNSET_DATE = '2026-06-01';
+
+if (version === '1.0') {
+  // Still process but warn
+  await processWebhook($json.body);
+  
+  return {
+    statusCode: 200,
+    headers: {
+      'X-API-Deprecation': 'true',
+      'X-API-Sunset-Date': SUNSET_DATE,
+      'Link': '<https://docs.example.com/v2-migration>; rel="migration-guide"'
+    },
+    body: {
+      status: 'success',
+      warning: `API v1.0 is deprecated. Please migrate to v2.0 by ${SUNSET_DATE}`
+    }
+  };
+}
+            </div>
+
+            <h2>📚 SECTION 15: Quick Reference Materials</h2>
+
+            <h3>Webhook Status Code Cheat Sheet</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Meaning</th>
+                        <th>Retry?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>200</td>
+                        <td>OK</td>
+                        <td>Success</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>201</td>
+                        <td>Created</td>
+                        <td>Resource created</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>202</td>
+                        <td>Accepted</td>
+                        <td>Queued for processing</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>400</td>
+                        <td>Bad Request</td>
+                        <td>Invalid data</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>401</td>
+                        <td>Unauthorized</td>
+                        <td>Invalid credentials</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>403</td>
+                        <td>Forbidden</td>
+                        <td>No permission</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>404</td>
+                        <td>Not Found</td>
+                        <td>Endpoint doesn't exist</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>429</td>
+                        <td>Too Many Requests</td>
+                        <td>Rate limited</td>
+                        <td>Yes (after delay)</td>
+                    </tr>
+                    <tr>
+                        <td>500</td>
+                        <td>Internal Error</td>
+                        <td>Server error</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>502</td>
+                        <td>Bad Gateway</td>
+                        <td>Upstream error</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>503</td>
+                        <td>Service Unavailable</td>
+                        <td>Temporary issue</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>504</td>
+                        <td>Gateway Timeout</td>
+                        <td>Processing too slow</td>
+                        <td>Maybe</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>HTTP Headers Reference</h3>
+
+            <div class="code-block">
+// Common webhook headers
+{
+  // Content headers
+  "content-type": "application/json",
+  "content-length": "1234",
+  
+  // Authentication
+  "authorization": "Bearer token123",
+  "x-api-key": "key_abc",
+  
+  // Signature verification
+  "x-signature": "sha256=...",
+  "x-hub-signature-256": "sha256=...",  // GitHub
+  "x-shopify-hmac-sha256": "...",       // Shopify
+  "stripe-signature": "...",             // Stripe
+  
+  // Request tracking
+  "x-request-id": "req_abc123",
+  "x-correlation-id": "corr_xyz",
+  
+  // Client info
+  "user-agent": "Service/1.0",
+  "x-forwarded-for": "192.168.1.1",
+  
+  // Custom headers
+  "x-webhook-event": "order.created",
+  "x-api-version": "2.0",
+  "x-timestamp": "1633024800"
+}
+            </div>
+
+            <h3>JSON Schema Examples</h3>
+
+            <div class="code-block">
+// Validate webhook payload with JSON Schema
+const schema = {
+  "type": "object",
+  "required": ["event", "data"],
+  "properties": {
+    "event": {
+      "type": "string",
+      "pattern": "^[a-z]+\\.[a-z]+$"
+    },
+    "data": {
+      "type": "object",
+      "required": ["id", "amount"],
+      "properties": {
+        "id": { "type": "string" },
+        "amount": { 
+          "type": "number",
+          "minimum": 0
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        }
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+};
+
+// Validate in n8n Function node
+const Ajv = require('ajv');
+const ajv = new Ajv();
+const validate = ajv.compile(schema);
+
+if (!validate($json.body)) {
+  throw new Error('Invalid payload: ' + JSON.stringify(validate.errors));
+}
+            </div>
+
+            <h3>Regular Expressions for Validation</h3>
+
+            <div class="code-block">
+// Common validation patterns
+const patterns = {
+  // Email
+  email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  
+  // UUID
+  uuid: /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i,
+  
+  // Phone (US)
+  phone: /^\+?1?\d{10,14}$/,
+  
+  // URL
+  url: /^https?:\/\/.+/,
+  
+  // ISO Date
+  isoDate: /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d{3})?Z$/,
+  
+  // Credit Card (basic)
+  creditCard: /^\d{13,19}$/,
+  
+  // Webhook event name
+  eventName: /^[a-z_]+\.[a-z_]+$/
+};
+
+// Usage
+if (!patterns.email.test($json.body.email)) {
+  throw new Error('Invalid email format');
+}
+            </div>
+
+            <h3>Date/Time Formatting Guide</h3>
+
+            <div class="code-block">
+// ISO 8601 (Recommended for webhooks)
+"2026-02-04T10:30:00Z"           // UTC
+"2026-02-04T10:30:00+08:00"      // With timezone
+
+// Unix timestamp
+1738671000                        // Seconds since epoch
+1738671000000                     // Milliseconds since epoch
+
+// Convert in n8n
+const isoDate = new Date($json.body.timestamp).toISOString();
+const unixTimestamp = Math.floor(Date.now() / 1000);
+
+// Parse date
+const date = new Date($json.body.createdAt);
+const year = date.getFullYear();
+const month = date.getMonth() + 1;
+const day = date.getDate();
+            </div>
+
+            <h3>Troubleshooting Flowchart</h3>
+
+            <div class="code-block">
+Webhook Not Working?
+         ↓
+    Is workflow active? ──NO→ Activate workflow
+         ↓ YES
+    Check n8n logs ──→ See errors? ──YES→ Fix errors
+         ↓ NO                              ↓
+    Test with curl ──→ Works? ──NO→ Check URL/method
+         ↓ YES                    ↓
+    Check auth ──→ Valid? ──NO→ Fix credentials
+         ↓ YES            ↓
+    Verify payload ──→ Correct? ──NO→ Check data format
+         ↓ YES                  ↓
+    Check timeout ──→ Slow? ──YES→ Optimize workflow
+         ↓ NO                   ↓
+    Review rate limits ────────→ Contact support
+            </div>
+
+            <h3>Decision Tree: Webhook vs Polling vs Scheduled</h3>
+
+            <div class="code-block">
+Need real-time processing?
+    ↓ YES
+Does service support webhooks?
+    ↓ YES
+Use WEBHOOK ✅
+
+    ↓ NO (service doesn't support webhooks)
+Is data time-sensitive?
+    ↓ YES
+Use POLLING (every 1-5 min) ⏱️
+
+    ↓ NO (not real-time needed)
+Use SCHEDULED (hourly/daily) 📅
+
+// Example decisions:
+Payment received → WEBHOOK (immediate)
+Check stock price → POLLING (every 5 min)
+Daily report → SCHEDULED (8 AM daily)
+Order shipped → WEBHOOK (immediate)
+Scrape website → POLLING (hourly)
+            </div>
+
+            <h2>🎥 SECTION 16: Video Tutorial Links</h2>
+
+            <div class="info-box">
+                <strong>📺 Watch & Learn:</strong> These video tutorials provide visual walkthroughs of webhook concepts and n8n workflows.
+            </div>
+
+            <h3>Official n8n Video Tutorials</h3>
+            <ul>
+                <li><strong>n8n Webhook Basics:</strong> youtube.com/watch?v=n8n-webhooks-101</li>
+                <li><strong>Advanced Webhook Authentication:</strong> youtube.com/watch?v=n8n-webhook-security</li>
+                <li><strong>Building Your First Webhook Workflow:</strong> youtube.com/watch?v=n8n-first-webhook</li>
+                <li><strong>Error Handling Best Practices:</strong> youtube.com/watch?v=n8n-error-handling</li>
+                <li><strong>High-Volume Webhook Processing:</strong> youtube.com/watch?v=n8n-scaling-webhooks</li>
+            </ul>
+
+            <h3>Integration-Specific Tutorials</h3>
+            <ul>
+                <li><strong>Stripe + n8n Webhooks:</strong> youtube.com/watch?v=stripe-n8n-integration</li>
+                <li><strong>Shopify to n8n Automation:</strong> youtube.com/watch?v=shopify-n8n-webhooks</li>
+                <li><strong>GitHub Webhooks CI/CD:</strong> youtube.com/watch?v=github-n8n-cicd</li>
+                <li><strong>Slack Bot with n8n:</strong> youtube.com/watch?v=slack-n8n-bot</li>
+                <li><strong>Form Processing Workflows:</strong> youtube.com/watch?v=forms-n8n-webhooks</li>
+            </ul>
+
+            <h3>Community Tutorial Channels</h3>
+            <ul>
+                <li><strong>n8n Community Playlist:</strong> youtube.com/playlist?list=n8n-community</li>
+                <li><strong>Webhook Automation Examples:</strong> youtube.com/channel/webhook-automation</li>
+                <li><strong>No-Code Automation Hub:</strong> youtube.com/c/NoCodeAutomation</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>💡 Pro Tip:</strong> Watch tutorials at 1.5x speed and pause to take notes. Try building along with the instructor for better retention!
+            </div>
+
+            <h2>📖 SECTION 17: Glossary - A-Z Webhook Terminology</h2>
+
+            <h3>A-F</h3>
+            <p><strong>API:</strong> Application Programming Interface - rules for software communication</p>
+            <p><strong>Authentication:</strong> Verifying identity of webhook sender</p>
+            <p><strong>Callback URL:</strong> URL receiving asynchronous operation results</p>
+            <p><strong>CORS:</strong> Cross-Origin Resource Sharing security mechanism</p>
+            <p><strong>Dead Letter Queue:</strong> Storage for repeatedly failed webhooks</p>
+            <p><strong>Endpoint:</strong> Specific URL where webhooks are received</p>
+
+            <h3>G-M</h3>
+            <p><strong>HMAC:</strong> Hash-based Message Authentication Code for verification</p>
+            <p><strong>Idempotency:</strong> Repeated requests produce same result</p>
+            <p><strong>JSON:</strong> JavaScript Object Notation data format</p>
+            <p><strong>JWT:</strong> JSON Web Token for secure info transmission</p>
+            <p><strong>Load Balancer:</strong> Distributes webhooks across servers</p>
+            <p><strong>Metadata:</strong> Additional information about webhook data</p>
+
+            <h3>N-Z</h3>
+            <p><strong>n8n:</strong> Open-source workflow automation platform</p>
+            <p><strong>Payload:</strong> Data sent with webhook request</p>
+            <p><strong>Polling:</strong> Repeatedly checking for updates (alternative to webhooks)</p>
+            <p><strong>Rate Limiting:</strong> Restricting request frequency</p>
+            <p><strong>Signature:</strong> Cryptographic hash verifying authenticity</p>
+            <p><strong>SSL/TLS:</strong> Encryption protocols for HTTPS</p>
+            <p><strong>Webhook:</strong> HTTP callback sending real-time data between apps</p>
+
+            <h2>❓ SECTION 18: FAQ</h2>
+
+            <div class="info-box">
+                <strong>Q: What's the difference between webhook and API?</strong><br>
+                A: API is pull (you request data). Webhook is push (data sent to you when events occur).
+            </div>
+
+            <div class="info-box">
+                <strong>Q: Are webhooks secure?</strong><br>
+                A: Yes, when properly implemented with HTTPS, signature verification, and authentication.
+            </div>
+
+            <div class="info-box">
+                <strong>Q: What's test vs production webhook in n8n?</strong><br>
+                A: Test webhooks only work when editor is open. Production webhooks require activated workflow and work 24/7.
+            </div>
+
+            <div class="info-box">
+                <strong>Q: How do I prevent duplicate processing?</strong><br>
+                A: Implement idempotency using unique webhook IDs stored in database/cache.
+            </div>
+
+            <div class="info-box">
+                <strong>Q: Should I validate webhook signatures?</strong><br>
+                A: Absolutely! Signature validation ensures webhooks are genuine and haven't been tampered with.
+            </div>
+
+            <h2>⚠️ SECTION 19: Common Mistakes to Avoid</h2>
+
+            <div class="warning-box">
+                <strong>❌ #1: Not Using HTTPS</strong><br>
+                Solution: Always use HTTPS in production with valid SSL certificates.
+            </div>
+
+            <div class="warning-box">
+                <strong>❌ #2: Skipping Signature Verification</strong><br>
+                Solution: Always verify HMAC signatures from services like Stripe, Shopify, GitHub.
+            </div>
+
+            <div class="warning-box">
+                <strong>❌ #3: No Idempotency</strong><br>
+                Solution: Track processed webhook IDs to prevent duplicate processing.
+            </div>
+
+            <div class="warning-box">
+                <strong>❌ #4: Synchronous Long Processing</strong><br>
+                Solution: Respond immediately (202 Accepted), then process asynchronously.
+            </div>
+
+            <div class="warning-box">
+                <strong>❌ #5: Poor Error Handling</strong><br>
+                Solution: Wrap operations in try-catch, log errors, send alerts, implement dead letter queues.
+            </div>
+
+            <div class="warning-box">
+                <strong>❌ #6: Not Validating Input Data</strong><br>
+                Solution: Validate required fields, check data types, sanitize inputs, use JSON schema.
+            </div>
+
+            <h2>⚡ SECTION 20: Performance Benchmarks</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Excellent</th>
+                        <th>Good</th>
+                        <th>Poor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Simple webhook</td>
+                        <td>&lt;50ms</td>
+                        <td>50-200ms</td>
+                        <td>&gt;200ms</td>
+                    </tr>
+                    <tr>
+                        <td>With DB query</td>
+                        <td>&lt;100ms</td>
+                        <td>100-500ms</td>
+                        <td>&gt;500ms</td>
+                    </tr>
+                    <tr>
+                        <td>With API call</td>
+                        <td>&lt;200ms</td>
+                        <td>200-1000ms</td>
+                        <td>&gt;1000ms</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Throughput Capacity</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Setup</th>
+                        <th>Requests/sec</th>
+                        <th>Daily Capacity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Single instance (2 CPU, 4GB)</td>
+                        <td>50-100</td>
+                        <td>4-8M</td>
+                    </tr>
+                    <tr>
+                        <td>With Redis queue</td>
+                        <td>500-1000</td>
+                        <td>43-86M</td>
+                    </tr>
+                    <tr>
+                        <td>Load-balanced (3 instances)</td>
+                        <td>1000-2000</td>
+                        <td>86-172M</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>🔒 SECTION 21: Security Checklist</h2>
+
+            <h3>Transport Security</h3>
+            <ul>
+                <li>☑️ Using HTTPS/TLS for all endpoints</li>
+                <li>☑️ Valid SSL certificate (not self-signed)</li>
+                <li>☑️ TLS 1.2 or higher enforced</li>
+            </ul>
+
+            <h3>Authentication & Authorization</h3>
+            <ul>
+                <li>☑️ Webhook authentication implemented</li>
+                <li>☑️ Signature verification enabled</li>
+                <li>☑️ Secrets stored securely (env variables)</li>
+                <li>☑️ Regular credential rotation (every 90 days)</li>
+                <li>☑️ IP whitelisting configured</li>
+            </ul>
+
+            <h3>Input Validation</h3>
+            <ul>
+                <li>☑️ Validating all required fields present</li>
+                <li>☑️ Data type validation</li>
+                <li>☑️ Sanitizing user inputs</li>
+                <li>☑️ JSON schema validation</li>
+            </ul>
+
+            <h3>Attack Prevention</h3>
+            <ul>
+                <li>☑️ Rate limiting configured</li>
+                <li>☑️ Replay attack prevention</li>
+                <li>☑️ Request size limits enforced</li>
+                <li>☑️ CORS properly configured</li>
+            </ul>
+
+            <h3>Monitoring & Error Handling</h3>
+            <ul>
+                <li>☑️ All webhook requests logged</li>
+                <li>☑️ Alerts for high error rates</li>
+                <li>☑️ Dead letter queue implemented</li>
+                <li>☑️ Security event logging enabled</li>
+            </ul>
+
+            <h2>📦 SECTION 22: Webhook Payload Examples (Top 10)</h2>
+
+            <h3>1. E-Commerce Order</h3>
+            <div class="code-block">
+{
+  "event": "order.created",
+  "order_id": "ord_98765",
+  "customer": {
+    "email": "customer@example.com",
+    "name": "John Doe"
+  },
+  "items": [{
+    "sku": "PROD-001",
+    "name": "Wireless Headphones",
+    "quantity": 2,
+    "price": 49.99
+  }],
+  "total": 113.97,
+  "currency": "USD"
+}
+            </div>
+
+            <h3>2. Stripe Payment Success</h3>
+            <div class="code-block">
+{
+  "type": "payment_intent.succeeded",
+  "data": {
+    "object": {
+      "id": "pi_1MqxyzABCDEF",
+      "amount": 9999,
+      "currency": "usd",
+      "customer": "cus_ABC123",
+      "status": "succeeded"
+    }
+  }
+}
+            </div>
+
+            <h3>3. GitHub Push Event</h3>
+            <div class="code-block">
+{
+  "ref": "refs/heads/main",
+  "repository": {
+    "name": "my-project",
+    "full_name": "username/my-project"
+  },
+  "pusher": {
+    "name": "developer",
+    "email": "dev@example.com"
+  },
+  "commits": [{
+    "message": "Fix: Update webhook handler",
+    "author": {
+      "name": "Developer Name"
+    }
+  }]
+}
+            </div>
+
+            <h3>4. Form Submission</h3>
+            <div class="code-block">
+{
+  "form_id": "contact_form_2026",
+  "submitted_at": "2026-02-04T10:30:00Z",
+  "fields": {
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "message": "Interested in webhook automation",
+    "source": "website_footer"
+  }
+}
+            </div>
+
+            <h3>5. User Registration</h3>
+            <div class="code-block">
+{
+  "event": "user.registered",
+  "user": {
+    "id": "usr_12345",
+    "email": "newuser@example.com",
+    "username": "newuser2026",
+    "created_at": "2026-02-04T10:30:00Z"
+  },
+  "registration_source": "website"
+}
+            </div>
+
+            <h2>⚖️ SECTION 23: Platform Comparison</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>n8n</th>
+                        <th>Zapier</th>
+                        <th>Make</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Type</strong></td>
+                        <td>Open-source</td>
+                        <td>SaaS only</td>
+                        <td>SaaS only</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deployment</strong></td>
+                        <td>Self-hosted or Cloud</td>
+                        <td>Cloud only</td>
+                        <td>Cloud only</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Custom Code</strong></td>
+                        <td>✅ Full JS/Python</td>
+                        <td>Limited</td>
+                        <td>✅ Good</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Webhook Control</strong></td>
+                        <td>✅ Complete</td>
+                        <td>Limited</td>
+                        <td>✅ Good</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cost (1M webhooks)</strong></td>
+                        <td>~$20-100</td>
+                        <td>~$2,000+</td>
+                        <td>~$300+</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>When to Choose n8n</h3>
+            <ul>
+                <li>✅ Complete webhook control needed</li>
+                <li>✅ High volume (1M+ webhooks/month)</li>
+                <li>✅ Data privacy critical</li>
+                <li>✅ Custom integrations required</li>
+                <li>✅ Budget-conscious at scale</li>
+            </ul>
+
+        </div>
+
+        <div class="footer">
+            <strong>n8n Webhook Guide 2026</strong><br>
+            Created for mobile efficiency • Always use HTTPS in production<br>
+            💜 Happy Automating with n8n!
+        </div>
+    </div>
+</body>
+</html>
